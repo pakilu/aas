@@ -1,5 +1,24 @@
 evaluation/
 
+# Python virtual environments
+.venv/
+venv/
+.venv312/
+venv312/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Common development files
+.pytest_cache/
+.mypy_cache/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
