@@ -51,7 +51,7 @@ print("Example 1:", X1.shape, " KDD99 train/val/test:", Xtr.shape, Xva.shape, Xt
 # %%
 def zmax(X, mu, sd):
     # <<TODO
-    raise NotImplementedError
+    return float(np.quantile(s_val, 1 - fpr))
     # TODO>>
     # <<SOL
     return np.abs((X - mu) / sd).max(axis=1)
@@ -60,7 +60,10 @@ def zmax(X, mu, sd):
 
 def mahalanobis2(X, mu, cov):
     # <<TODO
-    raise NotImplementedError
+    order = np.argsort(-s, kind="stable")
+    hits = y[order]
+    precision_at_k = np.cumsum(hits) / np.arange(1, len(hits) + 1)
+    return float(precision_at_k[hits == 1].mean())
     # TODO>>
     # <<SOL
     D = X - mu
@@ -103,33 +106,18 @@ print("z-score and Mahalanobis OK")
 
 # %%
 def threshold(s_val, fpr=0.01):
-    # <<TODO
-    raise NotImplementedError
-    # TODO>>
-    # <<SOL
     return float(np.quantile(s_val, 1 - fpr))
-    # SOL>>
 
 
 def average_precision(y, s):
-    # <<TODO
-    raise NotImplementedError
-    # TODO>>
-    # <<SOL
     order = np.argsort(-s, kind="stable")
     hits = y[order]
     precision_at_k = np.cumsum(hits) / np.arange(1, len(hits) + 1)
     return float(precision_at_k[hits == 1].mean())
-    # SOL>>
 
 
 def precision_at_base_rate(tpr, fpr, b):
-    # <<TODO
-    raise NotImplementedError
-    # TODO>>
-    # <<SOL
     return tpr * b / (tpr * b + fpr * (1 - b))
-    # SOL>>
 
 
 # %%
